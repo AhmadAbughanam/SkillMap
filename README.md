@@ -65,16 +65,20 @@ SkillMap-Flask/
    python -m venv venv
    venv\Scripts\activate
    ```
+````
 
 3. **Install dependencies**:
 
    ```bash
    pip install -r requirements.txt
    ```
+````
 
 4. **Download and place the LLM model** (e.g., Mistral 7B Instruct GGUF):
 
    * Place it in `app/models/` and update the `model_path` in `llm_client.py`.
+
+````
 
 5. **Run the app**:
 
@@ -87,6 +91,8 @@ SkillMap-Flask/
 
 ---
 
+````
+
 ## 🧠 Local LLM Integration
 
 * Uses `llama-cpp-python` to load a local GGUF model.
@@ -97,7 +103,7 @@ SkillMap-Flask/
 * Insight content is stored in the `llm_insights` table and displayed in the dashboard.
 
 ---
-
+````
 ## 🛠️ Developer Notes
 
 * Make sure `llama_cpp` is installed and your system supports AVX.
@@ -105,7 +111,7 @@ SkillMap-Flask/
 * Use `test.py` to verify model and generation output manually.
 
 ---
-
+````
 ## ✅ Example Prompt
 
 ```python
