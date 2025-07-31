@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="mb-0">AI Insight for "{{ skill.name }}"</h1>
+    <a href="{{ url_for('skills.skill_detail', skill_id=skill.id) }}" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left me-1"></i> Back to Skill
+    </a>
+</div>
+
+
+<div class="row">
+    <div class="col-md-5">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h5 class="mb-0">Generate New Insight</h5>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="mb-3">
+                        <label for="section" class="form-label">Select Insight Section:</label>
+                        <select id="section" name="section" class="form-select" required>
+                            <option value="general" {% if section == 'general' %}selected{% endif %}>General Summary</option>
+                            <option value="motivation" {% if section == 'motivation' %}selected{% endif %}>Motivational Boost</option>
+                            <option value="next steps" {% if section == 'next steps' %}selected{% endif %}>Suggested Next Steps</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-robot me-1"></i> Generate Insight
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% if insight %}
+    <div class="col-md-7">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h5 class="mb-0">Generated Insight</h5>
+            </div>
+            <div class="card-body">
+                <pre class="mb-0" style="white-space: pre-wrap;">{{ insight }}</pre>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %} {% block content %}
+<div class="px-4 py-5 my-5 text-center">
+  <h1 class="display-5 fw-bold">Welcome to SkillMap</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">
+      Your personal knowledge & progress tracker, supercharged with AI insights.
+    </p>
+  </div>
+</div>
+
+<div class="row text-center">
+  <div class="col-md-4 mb-4">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">
+          <i class="bi bi-star-fill text-warning me-2"></i>View Skills
+        </h5>
+        <p class="card-text">
+          Browse, add, and manage your skills and learning milestones.
+        </p>
+        <div class="mt-auto">
+          <a href="{{ url_for('skills.skills_list') }}" class="btn btn-primary"
+            >Go to Skills</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 mb-4">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">
+          <i class="bi bi-bar-chart-line-fill text-success me-2"></i>Dashboard
+        </h5>
+        <p class="card-text">
+          Visualize your learning progress and get instant insights.
+        </p>
+        <div class="mt-auto">
+          <a href="{{ url_for('main.dashboard') }}" class="btn btn-success"
+            >Go to Dashboard</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 mb-4">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">
+          <i class="bi bi-robot text-info me-2"></i>AI Insights
+        </h5>
+        <p class="card-text">
+          Generate smart suggestions and motivational tips.
+        </p>
+        <div class="mt-auto">
+          <a href="{{ url_for('llm.llm_all_insights') }}" class="btn btn-info"
+            >View Insights</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

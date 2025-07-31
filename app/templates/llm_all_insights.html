@@ -1,0 +1,80 @@
+{% extends "base.html" %} {% block content %}
+<div class="card shadow-sm">
+  <div class="card-header">
+    <h1 class="h4 mb-0">All AI Insights</h1>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th>Skill</th>
+            <th>Section</th>
+            <th>Generated At</th>
+            <th>Preview</th>
+            <th class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for insight in insights %}
+          <tr>
+            <td>{{ insight.skill.name }}</td>
+            <td>
+              <span class="badge bg-primary fw-normal"
+                >{{ insight.section }}</span
+              >
+            </td>
+            <td>{{ insight.generated_at.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td>
+              <pre
+                class="bg-light p-2 rounded"
+                style="
+                  max-height: 100px;
+                  overflow: auto;
+                  white-space: pre-wrap;
+                  font-size: 0.8em;
+                "
+              >
+{{ insight.content[:200] }}{% if insight.content|length > 200 %}...{% endif %}</pre
+              >
+            </td>
+            <td class="text-end">
+              <form
+                method="post"
+                action="{{ url_for('llm.llm_clear_cache') }}"
+                class="confirm-delete"
+              >
+                <input
+                  type="hidden"
+                  name="before_date"
+                  value="{{ insight.generated_at.strftime('%Y-%m-%d') }}"
+                />
+                <input
+                  type="hidden"
+                  name="skill_id"
+                  value="{{ insight.skill_id }}"
+                />
+                <input
+                  type="hidden"
+                  name="section"
+                  value="{{ insight.section }}"
+                />
+                <button type="submit" class="btn btn-sm btn-outline-danger">
+                  <i class="bi bi-trash"></i> Delete
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="5" class="text-center text-muted p-4">
+              No AI insights available.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

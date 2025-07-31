@@ -1,0 +1,54 @@
+{% extends "base.html" %} {% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card shadow-sm">
+      <div class="card-header">
+        <h1 class="h4 mb-0">{{ action }} Skill</h1>
+      </div>
+      <div class="card-body">
+        <form method="post" novalidate>
+          <div class="mb-3">
+            <label for="name" class="form-label">Skill Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              required
+              value="{{ skill.name if skill else '' }}"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <input
+              type="text"
+              class="form-control"
+              id="category"
+              name="category"
+              value="{{ skill.category if skill else '' }}"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea
+              class="form-control"
+              id="description"
+              name="description"
+              rows="4"
+            >
+{{ skill.description if skill else '' }}</textarea
+            >
+          </div>
+          <hr />
+          <button type="submit" class="btn btn-primary">{{ action }}</button>
+          <a
+            href="{{ url_for('skills.skills_list') }}"
+            class="btn btn-secondary"
+            >Cancel</a
+          >
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

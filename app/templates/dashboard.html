@@ -1,0 +1,137 @@
+{% extends "base.html" %} {% block content %}
+<h1 class="mb-4">Dashboard</h1>
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card shadow-sm mb-4">
+      <div class="card-header">
+        <h5 class="mb-0">Rule-Based Insights</h5>
+      </div>
+      <div class="card-body">
+        {% if insights %}
+        <ul class="list-group list-group-flush">
+          {% for insight in insights %}
+          <li class="list-group-item">{{ insight }}</li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-muted mb-0">No insights available.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+      <div
+        class="card-header d-flex justify-content-between align-items-center"
+      >
+        <h5 class="mb-0">Your Skills</h5>
+        <a
+          href="{{ url_for('skills.skill_create') }}"
+          class="btn btn-primary btn-sm"
+        >
+          <i class="bi bi-plus-lg"></i> Add New Skill
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Last Updated</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for skill in skills %}
+              <tr>
+                <td>
+                  <a
+                    href="{{ url_for('skills.skill_detail', skill_id=skill.id) }}"
+                    >{{ skill.name }}</a
+                  >
+                </td>
+                <td>
+                  <span class="badge bg-secondary"
+                    >{{ skill.category or '—' }}</span
+                  >
+                </td>
+                <td>{{ skill.updated_at.strftime('%Y-%m-%d') }}</td>
+                <td>
+                  <a
+                    href="{{ url_for('skills.skill_edit', skill_id=skill.id) }}"
+                    class="btn btn-sm btn-outline-secondary"
+                  >
+                    <i class="bi bi-pencil"></i>
+                  </a>
+                  <form
+                    action="{{ url_for('skills.skill_delete', skill_id=skill.id) }}"
+                    method="post"
+                    class="confirm-delete"
+                  >
+                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+              {% else %}
+              <tr>
+                <td colspan="4" class="text-center text-muted">
+                  No skills found.
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card shadow-sm mb-4">
+      <div class="card-header">
+        <h5 class="mb-0">Skill Progress Over Time</h5>
+      </div>
+      <div class="card-body">
+        <div id="skill-progress-chart" style="width: 100%; height: 400px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block extra_scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const progressData = {{ progress_data | tojson | safe }};
+    const traces = [];
+
+    for (const skillName in progressData) {
+      const points = progressData[skillName];
+      traces.push({
+        x: points.map(p => p.date),
+        y: points.map(p => p.progress_level),
+        mode: 'lines+markers',
+        name: skillName,
+      });
+    }
+
+    const layout = {
+      title: 'Skill Progress',
+      xaxis: { title: 'Date' },
+      yaxis: { title: 'Progress Level', rangemode: 'tozero' },
+      hovermode: 'closest',
+      margin: { t: 40, l: 40, r: 20, b: 30 },
+      legend: {
+        orientation: 'h',
+        y: -0.2,
+        x: 0.5,
+        xanchor: 'center'
+      }
+    };
+
+    Plotly.newPlot('skill-progress-chart', traces, layout, { responsive: true });
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,145 @@
+/* === Base Typography & Colors === */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa; /* Light gray background */
+  color: #212529; /* Bootstrap default body text color */
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+/* === Navbar === */
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 1.4rem;
+}
+
+.navbar-nav .nav-link {
+  font-weight: 500;
+}
+
+/* === Buttons === */
+.btn-primary {
+  background-color: #0069d9;
+  border-color: #0062cc;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #004a9f;
+  border-color: #003d80;
+  outline: none;
+  box-shadow: 0 0 0 0.25rem rgba(0, 77, 153, 0.5);
+}
+
+/* Secondary buttons */
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: #5a6268;
+  border-color: #545b62;
+  outline: none;
+  box-shadow: none;
+}
+
+/* === Tables === */
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #e9ecef;
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+/* === Cards === */
+.card {
+  margin-top: 1rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  border-radius: 0.375rem;
+}
+
+/* === Alerts === */
+.alert {
+  border-radius: 0.375rem;
+}
+
+/* === Preformatted Text === */
+pre {
+  font-family: Consolas, Monaco, 'Courier New', monospace;
+  background-color: #e9ecef;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* === Forms === */
+.form-label {
+  font-weight: 600;
+}
+
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+  border-radius: 0.375rem;
+  border: 1px solid #ced4da;
+  transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #80bdff;
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* === Responsive Table Wrapper === */
+.table-responsive {
+  overflow-x: auto;
+}
+
+/* === Utility Margins === */
+.mb-3 {
+  margin-bottom: 1rem !important;
+}
+
+.mt-2 {
+  margin-top: 0.5rem !important;
+}
+
+.mt-3 {
+  margin-top: 1rem !important;
+}
+
+/* === Responsive adjustments === */
+@media (max-width: 576px) {
+  .table-responsive {
+    overflow-x: scroll;
+  }
+}
+
+/* === Misc === */
+a.btn-link {
+  padding: 0;
+  font-weight: 500;
+  color: #0d6efd;
+  text-decoration: underline;
+}
+
+a.btn-link:hover {
+  color: #0a58ca;
+  text-decoration: none;
+  cursor: pointer;
+}

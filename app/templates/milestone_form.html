@@ -1,0 +1,60 @@
+{% extends "base.html" %} {% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card shadow-sm">
+      <div class="card-header">
+        <h1 class="h4 mb-0">
+          {{ 'Edit' if milestone else 'Add' }} Milestone for "{{ skill.name }}"
+        </h1>
+      </div>
+      <div class="card-body">
+        <form method="post" novalidate>
+          <div class="mb-3">
+            <label for="note" class="form-label">Note</label>
+            <textarea
+              class="form-control"
+              id="note"
+              name="note"
+              required
+              rows="4"
+            >
+{{ milestone.note if milestone else '' }}</textarea
+            >
+          </div>
+          <div class="mb-3">
+            <label for="progress_level" class="form-label"
+              >Progress Level</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="progress_level"
+              name="progress_level"
+              value="{{ milestone.progress_level if milestone else '' }}"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="timestamp" class="form-label">Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="timestamp"
+              name="timestamp"
+              value="{{ milestone.timestamp.strftime('%Y-%m-%d') if milestone else '' }}"
+            />
+          </div>
+          <hr />
+          <button type="submit" class="btn btn-primary">
+            {{ 'Update' if milestone else 'Add' }}
+          </button>
+          <a
+            href="{{ url_for('skills.skill_detail', skill_id=skill.id) }}"
+            class="btn btn-secondary"
+            >Cancel</a
+          >
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
