@@ -86,8 +86,9 @@ SkillMap-Flask/
    flask run
    ```
    another way by:
-
+   ```bash
     python run.py
+   ```
 
 ---
 
